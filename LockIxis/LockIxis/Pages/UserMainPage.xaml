@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LockIxis.Pages.UserMainPage">
+  <MasterDetailPage.Master>
+    <ContentPage Title="Master">
+      <Label Text="Page du Lock" VerticalOptions="Center" HorizontalOptions="Center" />
+      <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="25" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="10" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Orientation="Horizontal"
+                   Grid.ColumnSpan="2">
+          <StackLayout Orientation="Vertical">
+            <!--<Button Text="{Binding Username}"/>-->
+            <Label Text="{Binding Username}"
+               TextColor="White"/>
+            <Label Text="{Binding PublicKey}"
+                   TextColor="Gray"/>
+          </StackLayout>
+        </StackLayout>
+
+        <Grid Grid.Row="2"
+            Grid.Column="1">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+
+          <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+          </Grid.RowDefinitions>
+
+          <Button Grid.Row="0"
+                 Text="User details"
+                 TextColor="White"
+                 VerticalOptions="CenterAndExpand"/>
+
+          <Button Grid.Row="1"
+                 Text="Owned locks"
+                 TextColor="White"
+                 VerticalOptions="CenterAndExpand"
+                 Clicked="ViewOwnLocksClicked"/>
+          
+          <Button Grid.Row="2"
+                 Text="Current Transactions"
+                 TextColor="White"
+                 VerticalOptions="CenterAndExpand"
+                 Clicked="ViewCurrentTransactionsClicked"/>
+        </Grid>
+      </Grid>
+    </ContentPage>
+  </MasterDetailPage.Master>
+  <MasterDetailPage.Detail>
+    <ContentPage>
+      <Grid RowSpacing="10" >
+        <Grid.RowDefinitions>
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <BoxView Color="Silver" />
+        <Label Text="Actions"
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="CenterAndExpand"/>
+
+        <Button Text="☰"
+              Font="24"
+              BackgroundColor="Transparent"
+              VerticalOptions="CenterAndExpand"
+              HorizontalOptions="Start"
+              Clicked="ShowMasterButtonClick" />
+              
+
+        <StackLayout Grid.Row="1">
+          <Grid x:Name="detail_grid">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+          <Button Grid.Row="0"
+                  Text="Action a Lock"
+                  TextColor="White"
+                  VerticalOptions="CenterAndExpand"
+                  Clicked="ActionLockClicked"/>
+          
+          <Button Grid.Row="1"
+                  Text="Generate a Transaction"
+                  TextColor="White"
+                  VerticalOptions="CenterAndExpand"
+                  Clicked="GenerateTransactionClicked"/>
+          </Grid>
+        </StackLayout>
+      </Grid>
+    </ContentPage>
+  </MasterDetailPage.Detail>
+</MasterDetailPage>

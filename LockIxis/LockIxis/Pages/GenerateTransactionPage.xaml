@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LockIxis.Pages.GenerateTransactionPage">
+  <BoxView Color="Silver" />
+  <Label Text="Generate a transaction"
+         VerticalOptions="CenterAndExpand"
+         HorizontalOptions="CenterAndExpand"/>
+  <Grid RowSpacing="10" >
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <BoxView Color="Silver" />
+    <Label Text="Generate a transaction"
+           VerticalOptions="CenterAndExpand"
+           HorizontalOptions="CenterAndExpand"/>
+
+    <StackLayout Grid.Row="1"
+                 VerticalOptions="StartAndExpand" HorizontalOptions="Fill">
+      <Button Text="Add" Clicked="OnAddButtonClicked" />
+      <ListView ItemsSource="{Binding ListViewItems}"
+                ItemSelected="HandleItemSelected"
+                VerticalOptions="FillAndExpand" 
+                HorizontalOptions="FillAndExpand"/>
+    </StackLayout>
+    <Button Grid.Row="2" Text="GenerateTransaction" />
+  </Grid>
+</ContentPage>
