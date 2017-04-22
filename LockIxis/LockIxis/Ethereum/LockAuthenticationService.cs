@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Nethereum.Web3;
 using Nethereum.Core.Signing.Crypto;
+using System.Threading.Tasks;
 
 namespace LockIxis.Ethereum
 {
@@ -25,5 +26,11 @@ namespace LockIxis.Ethereum
             this.address = "0x" + EthECKey.GetPublicAddress(privateKey); //could do checksum
             this.contract = web3.Eth.GetContract(abi, contractAddress);
         }
+
+        //public async Task<string> DeployContract(string )
+        //{
+
+        //    //return await web3.Eth.DeployContract.SendRequestAsync(abi, byteCode, LockIxisApp.CurrentUser().PublicKey);
+        //}
     }
 }

@@ -32,6 +32,7 @@
             Grid.Column="1">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="10" />
           </Grid.ColumnDefinitions>
 
           <Grid.RowDefinitions>
@@ -41,73 +42,51 @@
             <RowDefinition Height="35" />
           </Grid.RowDefinitions>
 
-          <Button Grid.Row="0"
-                 Text="User details"
-                 TextColor="White"
-                 VerticalOptions="CenterAndExpand"/>
+          <StackLayout Grid.Row="0" 
+                   Grid.ColumnSpan="2">
+            <Label Grid.Row="0" Grid.Column="0"
+                   Text="User details"
+                   TextColor="White"
+                   VerticalOptions="CenterAndExpand"/>
+          </StackLayout>
 
-          <Button Grid.Row="1"
-                 Text="Owned locks"
-                 TextColor="White"
-                 VerticalOptions="CenterAndExpand"
-                 Clicked="ViewOwnLocksClicked"/>
-          
-          <Button Grid.Row="2"
-                 Text="Current Transactions"
-                 TextColor="White"
-                 VerticalOptions="CenterAndExpand"
-                 Clicked="ViewCurrentTransactionsClicked"/>
+          <StackLayout Grid.Row="1" Orientation="Horizontal"
+                   Grid.ColumnSpan="2">
+            <Label Grid.Row="0" Grid.Column="0"
+                   Text="Owned locks"
+                   TextColor="White"
+                   VerticalOptions="CenterAndExpand">
+              <Label.GestureRecognizers>
+                <TapGestureRecognizer
+                        Tapped="OnTapGestureRecognizerTapped"
+                        NumberOfTapsRequired="1" />
+              </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="1"
+                   Text="{Binding NumberofLocks}"
+                   TextColor="White"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+              <Label.GestureRecognizers>
+                <TapGestureRecognizer
+                        Tapped="OnTapGestureRecognizerTapped"
+                        NumberOfTapsRequired="1" />
+              </Label.GestureRecognizers>
+            </Label>
+          </StackLayout>
+
+          <StackLayout Grid.Row="2" Orientation="Horizontal"
+                   Grid.ColumnSpan="2">
+            <Label Grid.Row="0"
+                   Text="Current Transactions"
+                   TextColor="White"
+                   VerticalOptions="CenterAndExpand"/>
+          </StackLayout>
         </Grid>
       </Grid>
     </ContentPage>
   </MasterDetailPage.Master>
   <MasterDetailPage.Detail>
-    <ContentPage>
-      <Grid RowSpacing="10" >
-        <Grid.RowDefinitions>
-          <RowDefinition Height="auto" />
-          <RowDefinition Height="auto" />
-          <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
-        <BoxView Color="Silver" />
-        <Label Text="Actions"
-               VerticalOptions="CenterAndExpand"
-               HorizontalOptions="CenterAndExpand"/>
-
-        <Button Text="☰"
-              Font="24"
-              BackgroundColor="Transparent"
-              VerticalOptions="CenterAndExpand"
-              HorizontalOptions="Start"
-              Clicked="ShowMasterButtonClick" />
-              
-
-        <StackLayout Grid.Row="1">
-          <Grid x:Name="detail_grid">
-            <Grid.RowDefinitions>
-              <RowDefinition Height="auto" />
-              <RowDefinition Height="auto" />
-              <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-          <Button Grid.Row="0"
-                  Text="Action a Lock"
-                  TextColor="White"
-                  VerticalOptions="CenterAndExpand"
-                  Clicked="ActionLockClicked"/>
-          
-          <Button Grid.Row="1"
-                  Text="Generate a Transaction"
-                  TextColor="White"
-                  VerticalOptions="CenterAndExpand"
-                  Clicked="GenerateTransactionClicked"/>
-          </Grid>
-        </StackLayout>
-      </Grid>
-    </ContentPage>
   </MasterDetailPage.Detail>
 </MasterDetailPage>

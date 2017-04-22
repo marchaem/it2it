@@ -1,11 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LockIxis.Pages.GenerateTransactionPage">
-  <BoxView Color="Silver" />
-  <Label Text="Generate a transaction"
-         VerticalOptions="CenterAndExpand"
-         HorizontalOptions="CenterAndExpand"/>
+             x:Class="LockIxis.Pages.LocksPagexaml">
   <Grid RowSpacing="10" >
     <Grid.RowDefinitions>
       <RowDefinition Height="auto" />
@@ -18,9 +14,16 @@
     </Grid.ColumnDefinitions>
 
     <BoxView Color="Silver" />
-    <Label Text="Generate a transaction"
+    <Label Text="Actions"
            VerticalOptions="CenterAndExpand"
            HorizontalOptions="CenterAndExpand"/>
+
+    <!--<Button Text="☰"
+          Font="24"
+          BackgroundColor="Transparent"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="Start"
+          Clicked="ShowMasterButtonClick" />-->
 
     <StackLayout Grid.Row="1"
                  VerticalOptions="StartAndExpand" HorizontalOptions="Fill">
@@ -32,18 +35,17 @@
         <ListView.ItemTemplate>
           <DataTemplate>
             <ViewCell>
-              <ViewCell.ContextActions>
-                <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                   Text="Delete" IsDestructive="True" />
-              </ViewCell.ContextActions>
+              <!--<ViewCell.ContextActions>
+              <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                 Text="Delete" IsDestructive="True" />
+            </ViewCell.ContextActions>-->
               <StackLayout Padding="15,0">
-                <Label Text="{Binding PublicKey}" />
+                <Label Text="{Binding .}" />
               </StackLayout>
             </ViewCell>
           </DataTemplate>
         </ListView.ItemTemplate>
       </ListView>
     </StackLayout>
-    <Button Grid.Row="2" Text="Generate Transaction" Clicked="OnGenerateTransaction"/>
   </Grid>
 </ContentPage>

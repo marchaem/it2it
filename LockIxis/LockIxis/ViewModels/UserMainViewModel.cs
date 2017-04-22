@@ -23,5 +23,23 @@ namespace LockIxis.ViewModels
         {
             get { return _user.PublicKey; }
         }
+
+        public string NumberofTransactions
+        {
+            get
+            {
+                OnPropertyChanged("NumberofTransactions");
+                return String.Format("{0}", _user.NumberofTransactions);
+            }
+        }
+
+        public string NumberofLocks
+        {
+            get
+            {
+                OnPropertyChanged("NumberofLocks");
+                return String.Format("{0}", _user.NumberofLocks); ;
+            }
+        }
     }
 }

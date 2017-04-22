@@ -17,5 +17,12 @@ namespace LockIxis
             var res = prefs.GetString(key, "NOT FOUND");
             return res;
         }
+
+        public static ICollection<string> GetSharedPreferenceSet(this Context c, string key)
+        {
+            ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(c);
+            var res = prefs.GetStringSet(key, null);
+            return res;
+        }
     }
 }

@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Android.Content;
 using Android.Preferences;
+using Xamarin.Forms;
 
 namespace LockIxis.Droid
 {
@@ -16,10 +17,11 @@ namespace LockIxis.Droid
 	{
 		protected override void OnCreate (Bundle bundle)
 		{
-			base.OnCreate (bundle);
+            base.OnCreate (bundle);
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
-			LoadApplication (LockIxisApp.GetInstance());
+
+            LoadApplication (LockIxisApp.GetInstance());
         }
 	}
 }

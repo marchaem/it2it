@@ -19,27 +19,86 @@ namespace LockIxis
     public class User
     {
         private string _username;
+        private string _password;
         private AsymmetricCipherKeyPair _ACKeypair = null;
         static X9ECParameters ec = SecNamedCurves.GetByName("secp256k1");
-        private HashSet<string> _ownLocks;
-        private HashSet<string> _authorizedLocks;
+        private HashSet<string> _locks = new HashSet<string>();
+        private HashSet<string> _transactions = new HashSet<string>();
+        private HashSet<string> _authorizedLocks = new HashSet<string>();
         private string _privateKey;
+        private string _publicKey;
 
+        public string Password
+        {
+            get { return _password; }
+        }
+
+        public int NumberofLocks
+        {
+            get { return _locks.Count; }
+        }
+
+        public int NumberofTransactions
+        {
+            get { return _transactions.Count; }
+        }
+
+        public HashSet<string> Locks
+        {
+            get { return _locks; }
+            set { _locks = value; }
+        }
+
+        public HashSet<string> AuthorizedLocks
+        {
+            get { return _authorizedLocks; }
+            set { _authorizedLocks = value; }
+        }
+
+        public HashSet<string> Transactions
+        {
+            get { return _transactions; }
+        }
 
         public string PublicKey
         {
             get
             {
-                return "0x" + EthECKey.GetPublicAddress(_privateKey);
+                if (_publicKey == null)
+                {
+                    return "0x" + EthECKey.GetPublicAddress(_privateKey);
+                }
+                return _publicKey;
             }
+            set
+            {
+                _publicKey = value;
+            }
+        }
+        public void AddLock(string address)
+        {
+            _locks.Add(address);
+            LockIxisApp.GetPrefsEditor().PutStringSet(("userLocks"), _locks);
+            LockIxisApp.GetPrefsEditor().Apply();
+        }
+
+        public void AddTransaction(string address)
+        {
+            _transactions.Add(address);
         }
 
         public User()
         { }
 
-        public User(string username)
+        //public override string ToString()
+        //{
+        //    return PublicKey;
+        //}
+
+        public User(string username, string password)
         {
             _username = username;
+            _password = password;
         }
 
         public string PrivateKey

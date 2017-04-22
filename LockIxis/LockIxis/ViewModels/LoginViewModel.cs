@@ -13,6 +13,7 @@ namespace LockIxis.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         string _username;
+        string _password;
         private RegisterPage _page; // HERE
 
         Command logInUserCommand;
@@ -26,6 +27,12 @@ namespace LockIxis.ViewModels
         {
             get { return _username; }
             set { _username = value; OnPropertyChanged("Username"); }
+        }
+
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; OnPropertyChanged("Password"); }
         }
 
 
@@ -44,7 +51,7 @@ namespace LockIxis.ViewModels
 
         public void ExecuteSignUpUserCommand()
         {
-            var user = new User(Username);
+            var user = new User(Username, Password);
             string _scannedQR = "";
 
             #region QR options

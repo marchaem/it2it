@@ -25,25 +25,28 @@
     <StackLayout Grid.Row="1"
                  VerticalOptions="StartAndExpand" HorizontalOptions="Fill">
       <!--<Button Text="Add" Clicked="OnAddButtonClicked" />-->
+      <!--ItemTapped="OnItemTapped"-->
       <ListView ItemsSource="{Binding ListViewItems}"
                 ItemSelected="HandleItemSelected"
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand">
-        <ListView.ItemTemplate>
-          <DataTemplate>
-            <ViewCell>
-              <ViewCell.ContextActions>
-                <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                   Text="Delete" IsDestructive="True" />
-              </ViewCell.ContextActions>
-              <StackLayout Padding="15,0">
-                <Label Text="{Binding PublicKey}" />
-              </StackLayout>
-            </ViewCell>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <ViewCell.ContextActions>
+              <MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
+                 Text="More" />
+              <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                 Text="Delete" IsDestructive="True" />
+            </ViewCell.ContextActions>
+            <StackLayout Padding="15,0">
+              <Label Text="{Binding PublicKey}" />
+            </StackLayout>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+      </ListView>-
     </StackLayout>
-    <Button Grid.Row="2" Text="Generate Transaction" Clicked="OnGenerateTransaction"/>
+    <Button Grid.Row="2" Text="GenerateTransaction" />
   </Grid>
 </ContentPage>

@@ -20,6 +20,18 @@
       <DependentUpon>GenerateTransactionPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LockActionsPage.xaml.cs">
+      <DependentUpon>LockActionsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LockBTConnectionPage.xaml.cs">
+      <DependentUpon>LockBTConnectionPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\LocksPage.xaml.cs">
+      <DependentUpon>LocksPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\QRCodeScanningPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
@@ -29,8 +41,14 @@
       <DependentUpon>UserMainPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\UserMainPageDetailPages\AbstractUserMainPageDetailsPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\UserMainPageDetailPages\ConnectedLockPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\UserMainPageDetailPages\LockActionsPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\UserMainPageDetailPages\LocksPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ConnectedLockViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LocksViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\UserMainViewModel.cs" />
   </ItemGroup>
@@ -57,6 +75,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\GenerateTransactionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\LockActionsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\LocksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\LockBTConnectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

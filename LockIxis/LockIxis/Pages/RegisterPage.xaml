@@ -13,20 +13,24 @@
         <ColumnDefinition Width="Auto" />
         <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
-      <Label Text="LockIxis" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="0" />
-      <Entry x:Name="usernameEntry"
+      <Entry Grid.Row="0" x:Name="usernameEntry"
         Text="{Binding Username}"
         Placeholder="Login"
         HeightRequest="45" />
+      <Entry Grid.Row="1" x:Name="passwordEntry"
+        Text="{Binding Password}"
+        Placeholder="Password"
+        HeightRequest="45"
+        IsPassword="true"/>
       <Button Text="Scan my Private Key"
               HorizontalOptions="Center"
               VerticalOptions="CenterAndExpand"
-              Grid.Row="1" Grid.Column="0"
+              Grid.Row="2" Grid.Column="0"
               Command="{Binding RegisterUserCommand}"
               />
       <Button Text="Quit"
             HorizontalOptions="Center"
-            VerticalOptions="CenterAndExpand" Grid.Row="1" Grid.Column="1"  />
+            VerticalOptions="CenterAndExpand" Grid.Row="2" Grid.Column="1"  />
     </Grid>
   </RelativeLayout>
 </ContentPage>

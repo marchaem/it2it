@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LockIxis.Pages.LockActionsPagexaml">
+  <Grid RowSpacing="10" >
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+    </Grid.RowDefinitions>
+
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <BoxView Color="Silver" />
+    <Label Text="Actions"
+           VerticalOptions="CenterAndExpand"
+           HorizontalOptions="CenterAndExpand"/>
+
+    <Button Text="☰"
+          Font="24"
+          BackgroundColor="Transparent"
+          VerticalOptions="CenterAndExpand"
+          HorizontalOptions="Start"
+          Clicked="ShowMasterButtonClick" />
+
+    <StackLayout Grid.Row="1">
+      <Grid x:Name="detail_grid">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0"
+                Text="Action a Lock"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                Clicked="ActionLockClicked"/>
+
+        <Button Grid.Row="1"
+                Text="Generate a Transaction"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                Clicked="GenerateTransactionClicked"/>
+      </Grid>
+    </StackLayout>
+  </Grid>
+</ContentPage>
