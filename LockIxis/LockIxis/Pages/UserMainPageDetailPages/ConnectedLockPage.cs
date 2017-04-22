@@ -54,8 +54,9 @@ namespace LockIxis.Pages.UserMainPageDetailPages
             BindingContext = new ConnectedLockViewModel(_lock);
 
             var text = new Label();
-            text.SetBinding<ConnectedLock>(Label.TextProperty, lk => lk.Text);
-            text.BindingContext = new ConnectedLockViewModel(_lock); 
+            text.BindingContext = this;
+            text.SetBinding(Label.TextProperty, "Text");
+
             //text.SetBinding(Label.TextProperty, "Text");
 
             getLockIdButton.Clicked += GetLockIdClicked;
@@ -145,6 +146,15 @@ namespace LockIxis.Pages.UserMainPageDetailPages
                     });
                     break;
                 }
+            }
+        }
+
+        public string Text
+        {
+            get
+            {
+                return "empty";
+                //return String.Format("Lock: \n*Bluetooth device name:{0}\n*Public key:{1}\n*Status:{2}\n", _lock.BTDeviceAddress, Status);
             }
         }
 
