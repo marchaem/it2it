@@ -1,33 +1,36 @@
 contract BlockContract{
 	
 
-	mapping(address => Transaction) public transactions;
-
-	Struct Transaction{
+	
+    //This Object will represent a transaction
+	struct BLockTransaction {
 		address seller;
 		address buyer;
 		address authority;
-		address[] signatories
-		address transactionId;
-		address lockID
+		bytes32 signatories;
+		address lockID;
+		address transcationID;
 
 	}
 	
+	//A mapping where will be saved the transactions
+	mapping(address => BLockTransaction) transactions;
+	
 	//Create a transaction and save it in the blockchain
-	createTransaction(address buyer, address  authority, byte32[] signature, address lockID, address transcationID){
+	function createTransaction(address seller, address buyer, address  authority, bytes32 signatories, address lockID, address transcationID) returns (bool saved) {
 		//store these informations in the blockchain.
-		transactions[transactionID] = Transaction(msg.sender, buyer, authority, signature, lockId, transcationId);
-
+		BLockTransaction memory tx = BLockTransaction(seller, buyer,authority,signatories,lockID, transcationID);
+        	transactions[transcationID] = tx;
 		//We will return always true in this step.
 		return true;
 	}
 
 	//Verify if the user is eligible to open the lock (is the user a part of the transaction?)
-	verifyUser(transactionID){
+	function verifyUser(address transactionID) returns (bool verified) {
 
-		Transaction tx = transactions[transactionID];
+		BLockTransaction tx = transactions[transactionID];
 
-		if(tx.sellet == msg.sender || tx.buyer == msg.sender || tx.authority == msg.sender){
+		if(tx.seller == msg.sender || tx.buyer == msg.sender || tx.authority == msg.sender){
 			return true;
 		}else{
 			return false;
