@@ -59,6 +59,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Ethereum\Scripts\BLockContractSolidity.sl" />
     <None Include="$(MSBuildThisFileDirectory)GettingStarted.Xamarin" />
   </ItemGroup>
   <ItemGroup>
