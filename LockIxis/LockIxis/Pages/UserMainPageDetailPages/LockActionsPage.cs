@@ -55,11 +55,8 @@ namespace LockIxis.Pages.UserMainPageDetailPages
             stacklayout.Children.Add(grid);
 
             _grid.Children.Add(stacklayout, 0, 1);
-            //_grid.Children.Add(_textview, 0, 1);
 
             Content = _grid;
-            //Toast.MakeText(Android.App.Application.Context, "ouhlalaa", ToastLength.Long).Show();
-
         }
 
         async void ActionLockClicked(object sender, EventArgs eventargs)
@@ -98,7 +95,6 @@ namespace LockIxis.Pages.UserMainPageDetailPages
                                 if (selectedDeviceName != null && selectedDeviceName.Length > 0)
                                 {
                                     var selectedDevice = bt.BondedDevices.FirstOrDefault(d => d.Name.Equals(selectedDeviceName));
-                                    //await DisplayAlert("blabla", selectedDeviceName, "OK");
                                     var selectedLock = new ConnectedLock(lock_address, selectedDevice);
                                     if (selectedLock.IsConnected)
                                     {
@@ -189,97 +185,9 @@ namespace LockIxis.Pages.UserMainPageDetailPages
                     Toast.MakeText(Android.App.Application.Context, "Socket failed to create", ToastLength.Long).Show();
                     return false;
                 }
-                //beginListenForData(btSocket);
                 return true;
             }
-            //_textview.Text = "No Lock Found in bluetooth environment (HC-05)";
             return false;
         }
-
-        //    public void beginListenForData(BluetoothSocket btSocket)
-        //    {
-        //        Stream inStream = null;
-        //        try
-        //        {
-        //            inStream = btSocket.InputStream;
-        //        }
-        //        catch (System.IO.IOException ex)
-        //        {
-        //            Console.WriteLine(ex.Message);
-        //        }
-        //        //_textview.Text = "Lock: init communication";
-        //        Task.Factory.StartNew(() => {
-        //            byte[] buffer = new byte[1024];
-        //            byte[] bufferCumulate = new byte[1024];
-        //            int[] len = new int[10];
-        //            int lenIndex = 0;
-        //            int cumul = 0;
-        //            int bytes;
-        //            bool eol = false;
-        //            while (true)
-        //            {
-        //                try
-        //                {
-        //                    bytes = inStream.Read(buffer, 0, buffer.Length);
-        //                    len[lenIndex++] = bytes;
-        //                    for (int i = 0; i < bytes; i++)
-        //                    {
-        //                        if (buffer[i] == '\n')
-        //                        {
-        //                            eol = true;
-        //                        }
-        //                    }
-        //                    Buffer.BlockCopy(buffer, 0,
-        //                                    bufferCumulate, cumul,
-        //                                        bytes);
-        //                    cumul += bytes;
-        //                    bufferCumulate[cumul] = 0;
-        //                    if (eol)
-        //                    {
-        //                        string valor = System.Text.Encoding.ASCII.GetString(bufferCumulate);
-        //                        eol = false;
-        //                        cumul = 0;
-        //                        lenIndex = 0;
-        //                        Device.BeginInvokeOnMainThread(() => {
-        //                            //Toast.MakeText(Android.App.Application.Context, 
-        //                            // Result.Text = Result.Text + "\n" + valor;
-        //                            //_textview.Text = valor;
-        //                        });
-        //                    }
-        //                }
-        //                catch (Java.IO.IOException)
-        //                {
-        //                    Device.BeginInvokeOnMainThread(() => {
-        //                        //_textview.Text = "Lock: end of communication";
-        //                    });
-        //                    break;
-        //                }
-        //            }
-        //        });
-        //    }
-
-        //    private void writeData(string data)
-        //    {
-        //        try
-        //        {
-        //            var btSocket = LockIxisApp.GetBTSocket();
-        //            if (btSocket != null)
-        //            {
-        //                byte[] msgBuffer = new byte[data.Length * sizeof(char)];
-        //                System.Buffer.BlockCopy(data.ToCharArray(), 0, msgBuffer, 0, msgBuffer.Length);
-        //                var outStream = btSocket.OutputStream;
-        //                outStream.Write(msgBuffer, 0, msgBuffer.Length);
-        //            }
-        //            else
-        //            {
-        //                throw new Exception("!!! Could not retrieve Socket !!!");
-        //            }
-        //        }
-        //        catch (System.Exception e)
-        //        {
-        //            Toast.MakeText(Android.App.Application.Context, e.Message, ToastLength.Long);
-        //        }
-        //    }
-        //}
     }
 }

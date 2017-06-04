@@ -12,11 +12,12 @@ using Xamarin.Forms;
 
 namespace LockIxis.Pages.UserMainPageDetailPages
 {
-    public class ConnectedLockPage : AbstractUserMainPageDetailsPage
+    public class ConnectedLockPage : AbstractUserMainPageDetailsPage 
     {
         private static BluetoothSocket _btSocket = LockIxisApp.GetBTSocket();
         private ConnectedLock _lock;
         Stream _stream;
+        private string _lockStatus = "";
 
         public ConnectedLockPage(MasterDetailPage root, ConnectedLock locktoconnect) : base(root, "Lock")
         {
@@ -84,11 +85,7 @@ namespace LockIxis.Pages.UserMainPageDetailPages
                                   TaskCreationOptions.LongRunning, 
                                   TaskScheduler.Default);
 
-            //Task.Factory.StartNew(() => { while (true) { writeData(new Java.Lang.String("state\n")); } },
-            //                      CancellationToken.None,
-            //                      TaskCreationOptions.LongRunning,
-            //                      TaskScheduler.Default);
-
+            writeData(new Java.Lang.String("state\n"));
         }
 
         public void backgroundListener()
@@ -124,17 +121,19 @@ namespace LockIxis.Pages.UserMainPageDetailPages
                         buffer = new byte[1024];
                         eol = false;
                         cumul = 0;
-                        if (valor == "Lock is open\n")
+                        if (valor.ToLower().Contains("open"))
                         {
                             _lock.Status = "Open";
+                            Status = _lock.Status;
                         }
                         if (valor.ToLower().Contains("closed"))
                         {
                             _lock.Status = "Closed";
+                            Status = _lock.Status;
                         }
                         Device.BeginInvokeOnMainThread(() => {
 
-                            Toast.MakeText(Android.App.Application.Context, valor, ToastLength.Long).Show();
+                            Toast.MakeText(Android.App.Application.Context, valor, ToastLength.Short).Show();
 
                         });
                     }
@@ -153,10 +152,22 @@ namespace LockIxis.Pages.UserMainPageDetailPages
         {
             get
             {
-                return "empty";
-                //return String.Format("Lock: \n*Bluetooth device name:{0}\n*Public key:{1}\n*Status:{2}\n", _lock.BTDeviceAddress, Status);
+                //return "empty";
+                return String.Format("Lock: \n*Public key:{2}\n*Bluetooth device Name:{0}\n*Bluetooth device Address:{1}\n*Status:{3}\n", _lock.BTDeviceName, _lock.BTDeviceAddress, _lock.PublicKey, Status);
             }
         }
+
+        public string Status
+        {
+            get { return _lockStatus; }
+            set
+            {
+                _lockStatus = value;
+                OnPropertyChanged("Text");
+            }
+        }
+
+
 
         private void writeData(Java.Lang.String data)
         {

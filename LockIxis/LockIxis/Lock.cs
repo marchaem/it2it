@@ -70,7 +70,7 @@ namespace LockIxis
                 {
                     return _btdevice.Name;
                 }
-                return null;
+                return "";
             }
         }
 
@@ -82,7 +82,7 @@ namespace LockIxis
                 {
                     return _btdevice.Address;
                 }
-                return null;
+                return "";
             }
         }
 
