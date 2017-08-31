@@ -65,6 +65,7 @@ namespace LockIxis.Pages
         }
 
         public void GenerateTransactionClickedScanDelegate(Result r)
+            
         {
             try
             {
@@ -83,7 +84,7 @@ namespace LockIxis.Pages
                             await LockIxisApp.GetInstance().MainPage.Navigation.PushAsync(generateTransactionPage);
                             //if(await generateTransactionPage.TransactionIsGenerated())
                             //{
-                            //    LockIxisApp.CurrentUser().AddLock(lock_address);
+                            await generateTransactionPage.OnGenerateTransaction(null,);
                             //}
 
                         }

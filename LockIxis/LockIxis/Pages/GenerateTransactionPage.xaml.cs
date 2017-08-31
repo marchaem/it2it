@@ -1,4 +1,5 @@
-﻿using Nethereum.Hex.HexTypes;
+﻿using LockIxis.Ethereum;
+using Nethereum.Hex.HexTypes;
 using Nethereum.Web3;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,13 @@ namespace LockIxis.Pages
 	public partial class GenerateTransactionPage : ContentPage
 	{
         public QRCodeScanningPage _qrCodeScanningPage;
-
+        static public string transactionId;
         public ObservableCollection<User> ListViewItems { get; set; }
         static string blankuseraddress = "Add a Party";
         private string _lockaddress;
+        bool isGenerated = false;
 
         static User blankUser = new User() { PublicKey = blankuseraddress };
-
-        Function _multiplyFunction2;
 
         private bool IsListEmpty
         {
@@ -48,6 +48,7 @@ namespace LockIxis.Pages
             BindingContext = this;
             ListViewItems = new ObservableCollection<User> { blankUser };
             _qrCodeScanningPage = new QRCodeScanningPage(AddNewAddress);
+            isGenerated = false;
             InitializeComponent();
 		}
 
@@ -105,51 +106,25 @@ namespace LockIxis.Pages
             }
         }
 
+        internal Task<bool> TransactionIsGenerated()
+        {
+            
+        }
+
         public async void OnGenerateTransaction(object sender, EventArgs e)
         {
             if (!IsListEmpty)
             {
                 #region smart contract deployment
-                var senderAddress = LockIxisApp.CurrentUser().PublicKey;
-                var password = "jll";
-                var abi = @"[{""constant"":false,""inputs"":[{""name"":""val"",""type"":""int256""}],""name"":""multiply"",""outputs"":[{""name"":""d"",""type"":""int256""}],""type"":""function""},{""inputs"":[{""name"":""multiplier"",""type"":""int256""}],""type"":""constructor""}]";
-                var abi2 = @"[{""constant"":false,""inputs"":[{""name"":""val"",""type"":""int256""}],""name"":""multiply"",""outputs"":[{""name"":""d"",""type"":""int256""}],""type"":""function""},{""inputs"":[{""name"":""multiplier"",""type"":""int256""}],""type"":""constructor""}]";
-                var byteCode =
-                    "0x60606040526040516020806052833950608060405251600081905550602b8060276000396000f3606060405260e060020a60003504631df4f1448114601a575b005b600054600435026060908152602090f3";
 
-                var web3 = new Web3(@"http://192.168.1.17:8545/");
-                //var unlockAccountResult = await web3.Personal.UnlockAccount.SendRequestAsync(senderAddress, password, 120);
-
-                var transactionHash = await web3.Eth.DeployContract.SendRequestAsync(abi, byteCode, senderAddress, 3);
-
-                var mineResult = await web3.Miner.Start.SendRequestAsync(6);
-
-                var receipt = await web3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(transactionHash);
-
-                while (receipt == null)
-                {
-                    Thread.Sleep(5000);
-                    receipt = await web3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(transactionHash);
-                }
-
-                mineResult = await web3.Miner.Stop.SendRequestAsync();
-
-                var contractAddress = receipt.ContractAddress;
-
-                var contract = web3.Eth.GetContract(abi, receipt.ContractAddress);
-
-                var f = contract.GetFunction("multiply");
-
-                var result = await f.CallAsync<int>(7);
-
-                if(result == 21)
-                {
-                    LockIxisApp.CurrentUser().AddLock(_lockaddress);
-                    LockIxisApp.CurrentUser().AddTransaction(transactionHash);
-                    await DisplayAlert("Transaction has been generated", "Transaction has been generated", "OK");
-                    await LockIxisApp.GetInstance().MainPage.Navigation.PopAsync();
-                }
-
+                //we unlock and deploy the contract with our geth account and we add the lock
+                await LockIxisApp.CurrentUser().Locker.unlock();
+                await LockIxisApp.CurrentUser().Locker.getContract();
+                await LockIxisApp.CurrentUser().AddLock(transactionId,_lockaddress);
+                LockIxisApp.CurrentUser().Locker.updateTransactionId(transactionId);
+                await DisplayAlert("Transaction has been generated", "Transaction has been generated", "OK");
+                await LockIxisApp.GetInstance().MainPage.Navigation.PopAsync();
+                
                 #endregion
             }
             else
