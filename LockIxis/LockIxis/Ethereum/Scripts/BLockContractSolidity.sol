@@ -108,7 +108,5 @@ contract BlockContract {
         return string(b);
     }
 
-    
-
 
 }

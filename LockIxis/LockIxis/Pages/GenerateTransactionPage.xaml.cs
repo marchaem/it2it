@@ -106,10 +106,7 @@ namespace LockIxis.Pages
             }
         }
 
-        internal Task<bool> TransactionIsGenerated()
-        {
-            
-        }
+        
 
         public async void OnGenerateTransaction(object sender, EventArgs e)
         {

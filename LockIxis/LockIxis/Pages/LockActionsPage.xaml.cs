@@ -84,7 +84,7 @@ namespace LockIxis.Pages
                             await LockIxisApp.GetInstance().MainPage.Navigation.PushAsync(generateTransactionPage);
                             //if(await generateTransactionPage.TransactionIsGenerated())
                             //{
-                            await generateTransactionPage.OnGenerateTransaction(null,);
+                            await generateTransactionPage.OnGenerateTransaction(LockIxisApp.CurrentUser,);  // <= ne sait pas quoi mettre en second argument
                             //}
 
                         }

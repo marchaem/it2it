@@ -149,7 +149,7 @@ namespace LockIxis.Ethereum
         public async Task<string> addLock(string transactionId, string lockId)
         {
             Console.WriteLine("on rentre dans le addLock");
-            Console.WriteLine("le lock que l'on veut ajouté vaut " + lockId);
+            //Console.WriteLine("le lock que l'on veut ajouté vaut " + lockId);
             AddressUtil adressUtil = new AddressUtil();  //utility to convert our public key to eth address
             string hashTransactionId = adressUtil.ConvertToChecksumAddress(transactionId);
             hashTransactionId = adressUtil.ConvertToValid20ByteAddress(hashTransactionId);
@@ -164,20 +164,19 @@ namespace LockIxis.Ethereum
             {
                 Console.WriteLine("on a pas une bonne adresse checkSum");
             }
-            Console.WriteLine("notre adresse finale du lock est : " + hashLockId);
+            //Console.WriteLine("notre adresse finale du lock est : " + hashLockId);
 
             Console.WriteLine("on rentre dans le getFunction de addLock");
             Function addLock = getFunction("addLock");
-            // Console.WriteLine("on rentre dans le addLock.CallAsync et notre tableau final vaut " + hash.ToHex(true));
-            var result = await addLock.SendTransactionAsync(senderAddress, new HexBigInteger(900000), null, hashTransactionId, hashLockId);
+            var result = await addLock.SendTransactionAsync(senderAddress, new HexBigInteger(900000), null,hashLockId);
             while (result == null)
             {
                 Console.WriteLine("notre adduser.sendTransationAsync est nulle...");
                 await Task.Delay(5000);
-                result = await addLock.SendTransactionAsync(senderAddress, new HexBigInteger(900000), null, hashTransactionId, hashLockId);
+                result = await addLock.SendTransactionAsync(senderAddress, new HexBigInteger(900000), null,hashLockId);
             }
             var receipt = await MineAndGetReceiptAsync(web3, result);
-            Console.WriteLine("on a ajouté le lock " + hashLockId + " et le transactionId vaut :" + transactionId);
+           // Console.WriteLine("on a ajouté le lock " + hashLockId + " et le transactionId vaut :" + transactionId);
             Console.WriteLine("on sort du addLock");
             return result;
         }
